@@ -5,7 +5,7 @@ public class Tenant
 	private String LastName;
 	private int aptNumber;
 	private double currentRentPaid;
-	private ArrayList<Finances> rentPaymentHistory;
+	//private ArrayList<Finances> rentPaymentHistory;
 	
 	public Tenant()
 	{
@@ -44,6 +44,8 @@ public class Tenant
 		this.currentRentPaid = currentRentPaid;
 	}
 
+	//TODO: Maybed delete these 2 methods
+	/*
 	public ArrayList<Finances> getRentPaymentHistory() {
 		return rentPaymentHistory;
 	}
@@ -51,4 +53,5 @@ public class Tenant
 	public void setRentPaymentHistory(ArrayList<Finances> rentPaymentHistory) {
 		this.rentPaymentHistory = rentPaymentHistory;
 	}
+	*/
 }

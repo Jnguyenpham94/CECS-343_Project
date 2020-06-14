@@ -1,7 +1,7 @@
 
 public class Expense 
 {
-	private Finances financeObject; //includes the date and payment amount
+	//private Finances financeObject; //includes the date and payment amount
 	private String payee;
 	private String budgetCategory;
 	
@@ -10,13 +10,16 @@ public class Expense
 		//constructor;
 	}
 
+	//TODO: Maybe delete these 2 methods
+	/*
 	public Finances getFinanceObject() {
 		return financeObject;
 	}
-
+	
 	public void setFinanceObject(Finances financeObject) {
 		this.financeObject = financeObject;
 	}
+	*/
 
 	public String getPayee() {
 		return payee;
