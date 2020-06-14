@@ -1,0 +1,298 @@
+Output sample
+
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Harry Ellis
+Enter tenant's apartment number (101): 101
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Wanda Brown
+Enter tenant's apartment number (101): 102
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Peter Quan
+Enter tenant's apartment number (101): 102
+The apartment is occupied
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Peter Quan
+Enter tenant's apartment number (101): 103
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Bill Vasquez
+Enter tenant's apartment number (101): 104
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+t
+Enter tenant's name (George Smith): Jane Garth
+Enter tenant's apartment number (101): 201
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Harry Ellis
+Enter amount paid (345.67): 695
+Enter month rent is for (1-12): 1
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Harry Ellis
+Enter amount paid (345.67): 695
+Enter month rent is for (1-12): 2
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: John Ng
+No tenant with that name.
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Harry Ellis
+Enter amount paid (345.67): 695
+Enter month rent is for (1-12): 3
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Harry Ellis
+Enter amount paid (345.67): 695
+Enter month rent is for (1-12): 4
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Harry Ellis
+Enter amount paid (345.67): 695
+Enter month rent is for (1-12): 5
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Wanda Brown
+Enter amount paid (345.67): 595
+Enter month rent is for (1-12): 1
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Wanda Brown
+Enter amount paid (345.67): 595
+Enter month rent is for (1-12): 2
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Wanda Brown
+Enter amount paid (345.67): 595
+Enter month rent is for (1-12): 3
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Wanda Brown
+Enter amount paid (345.67): 595
+Enter month rent is for (1-12): 4
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Wanda Brown
+Enter amount paid (345.67): 595
+Enter month rent is for (1-12): 5
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Peter Quan
+Enter amount paid (345.67): 810
+Enter month rent is for (1-12): 1
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+r
+Enter tenant's name: Peter Quan
+Enter amount paid (345.67): 810
+Enter month rent is for (1-12): 2
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+e
+Enter month (1-12): 1
+Enter day (1-31): 2
+Enter expense category (Repairing, Utilities): Utilities
+Enter payee (Bob's Hardware, Big Electric Co): City Water
+Enter amount (39.95): 978.0
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+i
+Enter 't' to add tenant,
+'r' to record rent payment,
+'e' to record expense:
+e
+Enter month (1-12): 2
+Enter day (1-31): 15
+Enter expense category (Repairing, Utilities): Insurance
+Enter payee (Bob's Hardware, Big Electric Co): All State
+Enter amount (39.95): 4840.0
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+d
+Enter 't' to display tenants,
+'r' to display rents
+'e' to display expenses,
+'a' to display annual report:
+t
+
+Apt# Tenant name
+-------------------
+104 Bill Vasquez
+101 Harry Ellis
+201 Jane Garth
+103 Peter Quan
+102 Wanda Brown
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+d
+Enter 't' to display tenants,
+'r' to display rents
+'e' to display expenses,
+'a' to display annual report:
+r
+
+AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+------------------------------------------------------------------
+101 695 695 695 695 695 0 0 0 0 0 0 0
+102 595 595 595 595 595 0 0 0 0 0 0 0
+103 810 810 0 0 0 0 0 0 0 0 0 0
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+d
+Enter 't' to display tenants,
+'r' to display rents
+'e' to display expenses,
+'a' to display annual report:
+e
+
+Date Payee Amount Category
+----------------------------------------
+1/2 City Water 978 Utilities
+2/15 All State 4840 Insurance
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
+d
+Enter 't' to display tenants,
+'r' to display rents
+'e' to display expenses,
+'a' to display annual report:
+a
+Annual Summary
+--------------
+Income
+Rent 8070
+Expenses
+Insurance 4840
+Utilities 978
+
+Balance 2252
+Enter 'i' to input data,
+'d' to display a report,
+'q' to quit program:
