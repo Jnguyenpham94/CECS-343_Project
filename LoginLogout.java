@@ -7,7 +7,8 @@ public class LoginLogout{
         this.password = "1234";
     }
 
-    public String login(){
+    public boolean login()
+    {
         Scanner obj = new Scanner(System.in);
         System.out.print("Enter username: ");
         String user = obj.nextLine();
@@ -32,8 +33,15 @@ public class LoginLogout{
             }
         }
         obj.close();
+        UserInterface ui = new UserInterface();
+        //ui.Menu();
         //TODO: NEED TO CONNECT THIS WITH UserInterface class
-        return "STILL STUFF TO DO!!!!";
+        return true;
+    }
+
+    public void logout()
+    {
+        System.exit(0);
     }
 
     private String userID;
