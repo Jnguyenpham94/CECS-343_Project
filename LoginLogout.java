@@ -10,9 +10,9 @@ public class LoginLogout{
     public boolean login()
     {
         Scanner obj = new Scanner(System.in);
-        System.out.print("Enter username: ");
+        promptUserName();
         String user = obj.nextLine();
-        System.out.print("Enter password: ");
+        promptPassword();
         String pass = obj.nextLine();
         boolean entry = false;
         while(entry == false){
@@ -37,6 +37,16 @@ public class LoginLogout{
         //ui.Menu();
         //TODO: NEED TO CONNECT THIS WITH UserInterface class
         return true;
+    }
+
+    public void promptUserName()
+    {
+        System.out.print("Enter username: ");
+    }
+
+    public void promptPassword()
+    {
+        System.out.print("Enter password: ");
     }
 
     public void logout()
