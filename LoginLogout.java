@@ -10,7 +10,7 @@ public class LoginLogout{
     public boolean login()
     {
         Scanner obj = new Scanner(System.in);
-        promptUserName();
+        promptUsername();
         String user = obj.nextLine();
         promptPassword();
         String pass = obj.nextLine();
@@ -20,16 +20,8 @@ public class LoginLogout{
                 entry = true;
             }
             else{
-                System.out.println("Login Failed \n DO you want to try again y/n?");
-                String temp = obj.nextLine();
-                if(temp.equalsIgnoreCase("y")){
-                    login();
-                    entry = true;
-                }
-                else{
-                    obj.close();
-                    System.exit(0);
-                }
+                invalidLogin();
+                entry = true;
             }
         }
         obj.close();
@@ -39,7 +31,7 @@ public class LoginLogout{
         return true;
     }
 
-    public void promptUserName()
+    public void promptUsername()
     {
         System.out.print("Enter username: ");
     }
@@ -47,6 +39,20 @@ public class LoginLogout{
     public void promptPassword()
     {
         System.out.print("Enter password: ");
+    }
+
+    public void invalidLogin()
+    {
+        System.out.println("Login Failed \nDO you want to try again y/n?");
+        Scanner obj = new Scanner(System.in);
+        String temp = obj.nextLine();
+        if(temp.equalsIgnoreCase("y")){
+            login();
+        }
+        else{
+            obj.close();
+            logout();
+        }
     }
 
     public void logout()
