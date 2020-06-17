@@ -122,6 +122,7 @@ public class UserInterface extends LoginLogout{
                     break;
                 case 3:
                     System.out.println("Logging out.");
+                    input.close();
                     break;
                 default:
                     System.out.println("Invalid option.");
