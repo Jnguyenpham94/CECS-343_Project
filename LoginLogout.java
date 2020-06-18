@@ -7,7 +7,7 @@ public class LoginLogout{
         this.password = "1234";
     }
 
-    public boolean login()
+    public void login()
     {
         Scanner obj = new Scanner(System.in);
         promptUsername();
@@ -26,9 +26,7 @@ public class LoginLogout{
         }
         obj.close();
         UserInterface ui = new UserInterface();
-        //ui.Menu();
-        //TODO: NEED TO CONNECT THIS WITH UserInterface class
-        return true;
+        ui.Menu();
     }
 
     public void promptUsername()
@@ -57,6 +55,7 @@ public class LoginLogout{
 
     public void logout()
     {
+        System.out.println("Logging out.");
         System.exit(0);
     }
 

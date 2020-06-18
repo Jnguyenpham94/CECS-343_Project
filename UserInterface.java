@@ -5,15 +5,14 @@ public class UserInterface extends LoginLogout{
         
     }
 
-    /*public void Menu()
+    public void Menu()
     {
-        Scanner obj = new Scanner(System.in);
-        System.out.println("Enter 'i' to input data,");
-        System.out.println("'d' to display a report,");
-        System.out.println("'q' to quit program");
-        String choice = obj.next();
-        obj.close();
-    }*/
+        System.out.println("Login Successful");
+        mainMenu();
+        //TODO: need to link this with userInput();
+        //userInput();
+    }
+
     public void mainMenu()
     {
         System.out.println("Choose a task: ");
