@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 
 public class Expense 
 {
@@ -81,5 +82,15 @@ public class Expense
 		this.budgetCategory = budgetCategory;
 	}
 	
-	
+	public String toString()
+	{
+		double temp = amountPaid;
+		DecimalFormat df = new DecimalFormat("#.00");
+		String amountString = String.valueOf(df.format(temp));
+		//String amountString = String.format("%2f", amountPaid);
+		
+		String expenseString = date.toString() + "\t\t" + payee + "\t\t" + amountString + "\t\t" + budgetCategory;
+		
+		return expenseString;
+	}
 }
