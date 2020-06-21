@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.Scanner;
 public class UserInterface extends LoginLogout{
+    final int CAPACITY = 20;
 
     public UserInterface(){
         
@@ -9,8 +11,7 @@ public class UserInterface extends LoginLogout{
     {
         System.out.println("Login Successful");
         mainMenu();
-        //TODO: need to link this with userInput();
-        //userInput();
+        userInput();
     }
 
     public void mainMenu()
@@ -22,7 +23,7 @@ public class UserInterface extends LoginLogout{
     }
 
     public void inputMenu(){
-        System.out.println("Choose a data you'd like to input: ");
+        System.out.println("Choose data you'd like to input: ");
         System.out.println("1. Add a tenant");
         System.out.println("2. Record rent payment,");
         System.out.println("3. Record expense:");
@@ -36,6 +37,8 @@ public class UserInterface extends LoginLogout{
     }
 
     public void userInput(){
+        HashMap<Integer, Tenant> tenantList = new HashMap<Integer,Tenant>(CAPACITY){
+            private static final long serialVersionUID = 1L;};
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
         //If invalid choice
@@ -59,9 +62,22 @@ public class UserInterface extends LoginLogout{
                         } while (subChoice != 1 && subChoice != 2 && subChoice !=3);
                     }
                     //Submenu for data input
+                    Scanner data = new Scanner(System.in);
                     switch (subChoice){
                         case 1:
-                            System.out.println("1.Nothing yet");
+                            System.out.println("Enter tenant's first name (George): ");
+                            String fName = data.nextLine();
+                            System.out.println("Enter tenant's last name (Smith): ");
+                            String lName = data.nextLine();
+                            //TODO: apartment number duplicates not accounted for yet!!!
+                            System.out.println("Enter tenant's apartment number (101):");
+                            int aptNum = data.nextInt();
+                            System.out.println("Enter 'i' to input data, any other key to throw away.");
+                            String dataInput = data.next();
+                            if(dataInput.equals("i")){
+                                Tenant newTenant = new Tenant(fName, lName);
+                                tenantList.put(Integer.valueOf(aptNum), newTenant);
+                            }
                             break;
                         case 2:
                             System.out.println("2.Nothing yet");
@@ -72,8 +88,8 @@ public class UserInterface extends LoginLogout{
                         default:
                             System.out.println("Invalid input");
                             break;
-
                     }
+
                     mainMenu();
                     choice = input.nextInt();
                     if(choice != 1 && choice != 2 && choice !=3) {
@@ -96,7 +112,18 @@ public class UserInterface extends LoginLogout{
                     //Submenu for displaying data
                     switch (subChoice){
                         case 1:
-                            System.out.println("1.Nothing yet");
+                        System.out.println("\nApt# Tenant name");
+                        System.out.println("-------------------");
+                        if(!tenantList.isEmpty()){
+                            for(Integer i : tenantList.keySet()){
+                                String aptNum = i.toString();
+                                String person = tenantList.get(i).toString();
+                                System.out.println(aptNum + " " + person);
+                        }
+                        }
+                        else{
+                            System.out.println("EMPTY Tenant List");
+                        }
                             break;
                         case 2:
                             System.out.println("2.Nothing yet");

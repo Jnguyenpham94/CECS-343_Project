@@ -9,7 +9,13 @@ public class Tenant
 	
 	public Tenant()
 	{
-		//constructor
+		this("NoFirstName", "NoLastName");
+	}
+
+	public Tenant(String first, String last)
+	{
+		this.firstName = first;
+		this.LastName = last;
 	}
 
 	public String getFirstName() {
@@ -42,6 +48,11 @@ public class Tenant
 
 	public void setCurrentRentPaid(double currentRentPaid) {
 		this.currentRentPaid = currentRentPaid;
+	}
+
+	@Override
+	public String toString(){
+		return getFirstName() + " " + getLastName();
 	}
 
 	//TODO: Maybed delete these 2 methods

@@ -22,10 +22,9 @@ public class LoginLogout {
                 entry = true;
             }
         }
-        // obj.close(); have to comment this line to get thing works
         UserInterface ui = new UserInterface();
         ui.Menu();
-        ui.userInput();
+        obj.close();
     }
 
     public void promptUsername() {
