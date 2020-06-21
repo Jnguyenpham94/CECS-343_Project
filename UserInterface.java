@@ -82,9 +82,15 @@ public class UserInterface extends LoginLogout {
 
                             System.out.println("Enter 'i' to input data, any other key to throw away.");
                             String dataInput = data.next();
-                            if (dataInput.equals("i")) {
-                                Tenant newTenant = new Tenant(fName, lName);
-                                tenantList.put(Integer.valueOf(aptNum), newTenant);
+                            
+                            if(tenantList.size() != CAPACITY){
+                                if (dataInput.equals("i")) {
+                                    Tenant newTenant = new Tenant(fName, lName);
+                                    tenantList.put(Integer.valueOf(aptNum), newTenant);
+                                }
+                            }
+                            else{
+                                System.out.println("Cannot add more tenants apartment at capacity!!!");
                             }
                             break;
                         case 2:
