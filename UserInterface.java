@@ -82,7 +82,6 @@ public class UserInterface extends LoginLogout {
 
                             System.out.println("Enter 'i' to input data, any other key to throw away.");
                             String dataInput = data.next();
-                            
                             if(tenantList.size() != CAPACITY){
                                 if (dataInput.equals("i")) {
                                     Tenant newTenant = new Tenant(fName, lName);
@@ -94,10 +93,26 @@ public class UserInterface extends LoginLogout {
                             }
                             break;
                         case 2:
-                            System.out.println("2.Nothing yet");
+                            System.out.println("Enter Tenant's name: ");
+                            String tenantName = data.nextLine();
+                            System.out.println("Enter amount paid (345.67):");
+                            double amountPaid = data.nextDouble();
+                            System.out.println("Enter month rent is for (1-12): ");
+                            int monthPaid = data.nextInt();
+                            System.out.println("Enter 'i' to input data, any other key to throw away.");
+                            String dataRentInput = data.next();
+                            if (dataRentInput.equals("i")) {
+                                RentPayment newRentRecord = new RentPayment(tenantName, amountPaid, monthPaid);
+                            }
                             break;
                         case 3:
-                            System.out.println("3.Nothing yet");
+                            System.out.println("Enter day (1-31): ");
+                            System.out.println("Enter month (1-12): ");
+                            System.out.println("Enter year (0-99): ");
+                            System.out.println("Enter expense category (Repairing, Utilities): ");
+                            System.out.println("Enter payee (Bob's Hardware, Big Electric Co): ");
+                            System.out.println("Enter amount (39.95): ");
+                            System.out.println("Enter 'i' to input data, any other key to throw away.");
                             break;
                         default:
                             System.out.println("Invalid input");
@@ -139,13 +154,16 @@ public class UserInterface extends LoginLogout {
                             }
                             break;
                         case 2:
-                            System.out.println("2.Nothing yet");
+                            System.out.println("AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec");
+                            System.out.println("---------------------------------------------------------");
                             break;
                         case 3:
-                            System.out.println("3.Nothing yet");
+                            System.out.println("Date Payee Amount Category");
+                            System.out.println("---------------------------------------------------------");
                             break;
                         case 4:
-                            System.out.println("4.Nothing yet");
+                            System.out.println("Annual Summary");
+                            System.out.println("---------------");
                             break;
                         default:
                             System.out.println("Invalid input.");
