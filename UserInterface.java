@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class UserInterface extends LoginLogout {
     final int CAPACITY = 20;
+    HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
+        private static final long serialVersionUID = 1L;
+    };
 
     public UserInterface() {
 
@@ -37,9 +40,7 @@ public class UserInterface extends LoginLogout {
     }
 
     public void userInput() {
-        HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
-            private static final long serialVersionUID = 1L;
-        };
+
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
         // If invalid choice
@@ -72,25 +73,8 @@ public class UserInterface extends LoginLogout {
                             String lName = data.nextLine();
                             System.out.println("Enter tenant's apartment number (101):");
                             int aptNum = data.nextInt();
-
-                            // Handle duplicate apartment number error
-                            while (tenantList.containsKey(aptNum)) {
-                                System.out.printf("Apartment %d is occupied. Please enter another apartment number: ",
-                                        aptNum);
-                                aptNum = data.nextInt();
-                            }
-
-                            System.out.println("Enter 'i' to input data, any other key to throw away.");
-                            String dataInput = data.next();
-                            if(tenantList.size() != CAPACITY){
-                                if (dataInput.equals("i")) {
-                                    Tenant newTenant = new Tenant(fName, lName);
-                                    tenantList.put(Integer.valueOf(aptNum), newTenant);
-                                }
-                            }
-                            else{
-                                System.out.println("Cannot add more tenants apartment at capacity!!!");
-                            }
+                            apartmentAvailability(aptNum, data);
+                            addToList(fName, lName, aptNum, data);
                             break;
                         case 2:
                             System.out.println("Enter Tenant's name: ");
@@ -186,5 +170,28 @@ public class UserInterface extends LoginLogout {
                     break;
             }
         } while (choice != 3);
+    }
+
+
+
+    public void apartmentAvailability(int aptNum, Scanner in) {
+        // Handle duplicate apartment number error
+        while (tenantList.containsKey(aptNum)) {
+            System.out.printf("Apartment %d is occupied. Please enter another apartment number: ", aptNum);
+            aptNum = in.nextInt();
+        }
+    }
+
+    private void addToList(String fName, String lName, int aptNum, Scanner in) {
+        System.out.println("Enter 'i' to input data, any other key to throw away.");
+        String dataInput = in.next();
+        if (tenantList.size() != CAPACITY) {
+            if (dataInput.equals("i")) {
+                Tenant newTenant = new Tenant(fName, lName, aptNum);
+                tenantList.put(Integer.valueOf(aptNum), newTenant);
+            }
+        } else {
+            System.out.println("Cannot add more tenants apartment at capacity!!!");
+        }
     }
 }

@@ -9,13 +9,14 @@ public class Tenant
 	
 	public Tenant()
 	{
-		this("NoFirstName", "NoLastName");
+		this("NoFirstName", "NoLastName", 000);
 	}
 
-	public Tenant(String first, String last)
+	public Tenant(String first, String last, int aptNum)
 	{
 		this.firstName = first;
 		this.LastName = last;
+		this.aptNumber = aptNum;
 	}
 
 	public String getFirstName() {
