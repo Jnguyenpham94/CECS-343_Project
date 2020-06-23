@@ -74,7 +74,7 @@ public class UserInterface extends LoginLogout {
                             System.out.println("Enter tenant's apartment number (101):");
                             int aptNum = data.nextInt();
                             apartmentAvailability(aptNum, data);
-                            addToList(fName, lName, aptNum, data);
+                            addToTenantList(fName, lName, aptNum, data);
                             break;
                         case 2:
                             System.out.println("Enter Tenant's name: ");
@@ -182,7 +182,7 @@ public class UserInterface extends LoginLogout {
         }
     }
 
-    private void addToList(String fName, String lName, int aptNum, Scanner in) {
+    private void addToTenantList(String fName, String lName, int aptNum, Scanner in) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataInput = in.next();
         if (tenantList.size() != CAPACITY) {
