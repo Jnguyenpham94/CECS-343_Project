@@ -142,7 +142,7 @@ public class UserInterface extends LoginLogout {
                             System.out.println("---------------------------------------------------------");
                             break;
                         case 3:
-                            System.out.println("Date Payee Amount Category");
+                            System.out.printf("%15s%15s%15s%15s\n", "Date", "Payee", "Amount", "Category");
                             System.out.println("---------------------------------------------------------");
                             break;
                         case 4:
@@ -171,8 +171,6 @@ public class UserInterface extends LoginLogout {
             }
         } while (choice != 3);
     }
-
-
 
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error

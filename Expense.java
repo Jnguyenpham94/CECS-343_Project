@@ -1,47 +1,40 @@
 import java.text.DecimalFormat;
 
-public class Expense 
-{
-	//private Finances financeObject; //includes the date and payment amount
+public class Expense {
+	// private Finances financeObject; //includes the date and payment amount
 	private FinancialDate date;
 	private String payee;
 	private double amountPaid;
 	private String budgetCategory;
-	
-	public Expense()
-	{
+
+	public Expense() {
 		date = new FinancialDate();
 		payee = "";
 		amountPaid = 0.0;
 		budgetCategory = "";
 	}
-	
-	public Expense(FinancialDate fdate, String p, double ap, String bc)
-	{
+
+	public Expense(FinancialDate fdate, String p, double ap, String bc) {
 		date = fdate;
 		payee = p;
 		amountPaid = ap;
 		budgetCategory = bc;
 	}
-	
-	public Expense(int year, int month, int day, String p, double ap, String bc)
-	{
-		date = new FinancialDate(year,month,day);
+
+	public Expense(int year, int month, int day, String p, double ap, String bc) {
+		date = new FinancialDate(year, month, day);
 		payee = p;
 		amountPaid = ap;
 		budgetCategory = bc;
 	}
 
-	//TODO: Maybe delete these 2 methods
+	// TODO: Maybe delete these 2 methods
 	/*
-	public Finances getFinanceObject() {
-		return financeObject;
-	}
-	
-	public void setFinanceObject(Finances financeObject) {
-		this.financeObject = financeObject;
-	}
-	*/
+	 * public Finances getFinanceObject() { return financeObject; }
+	 * 
+	 * public void setFinanceObject(Finances financeObject) { this.financeObject =
+	 * financeObject; }
+	 */
 
 	public FinancialDate getDate() {
 		return date;
@@ -50,9 +43,8 @@ public class Expense
 	public void setDate(FinancialDate date) {
 		this.date = date;
 	}
-	
-	public void setDate(int y, int m, int d)
-	{
+
+	public void setDate(int y, int m, int d) {
 		date.setYear(y);
 		date.setMonth(m);
 		date.setDay(d);
@@ -81,16 +73,16 @@ public class Expense
 	public void setBudgetCategory(String budgetCategory) {
 		this.budgetCategory = budgetCategory;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		double temp = amountPaid;
 		DecimalFormat df = new DecimalFormat("#.00");
 		String amountString = String.valueOf(df.format(temp));
-		//String amountString = String.format("%2f", amountPaid);
-		
-		String expenseString = date.toString() + "\t\t" + payee + "\t\t" + amountString + "\t\t" + budgetCategory;
-		
+		// String amountString = String.format("%2f", amountPaid);
+
+		String expenseString = String.format("%15s%15s%15s%15s\n", date.toString(), payee, amountString,
+				budgetCategory);
+
 		return expenseString;
 	}
 }
