@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class UserInterface extends LoginLogout {
     final int CAPACITY = 20;
     HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
-        private static final long serialVersionUID = 1L;
-    };
+        private static final long serialVersionUID = 1L;};
+    HashMap<FinancialDate, Expense> expenseRecord = new HashMap<FinancialDate, Expense>();
 
     public UserInterface() {
 
@@ -91,12 +91,25 @@ public class UserInterface extends LoginLogout {
                             break;
                         case 3:
                             System.out.println("Enter day (1-31): ");
+                            int day = data.nextInt();
                             System.out.println("Enter month (1-12): ");
-                            System.out.println("Enter year (0-99): ");
+                            int month = data.nextInt();
+                            System.out.println("Enter year (2020): ");
+                            int year = data.nextInt();
+                            data.nextLine();
                             System.out.println("Enter expense category (Repairing, Utilities): ");
+                            String category = data.nextLine();
                             System.out.println("Enter payee (Bob's Hardware, Big Electric Co): ");
+                            String payee = data.nextLine();
                             System.out.println("Enter amount (39.95): ");
+                            double amount = data.nextDouble();
                             System.out.println("Enter 'i' to input data, any other key to throw away.");
+                            String dataExpenseInput = data.next();
+                            if(dataExpenseInput.equals("i")){
+                                FinancialDate expenseDate = new FinancialDate(year, month, day);
+                                Expense ex = new Expense(expenseDate, payee, amount, category);
+                                expenseRecord.put(expenseDate, ex);
+                            }
                             break;
                         default:
                             System.out.println("Invalid input");
@@ -144,6 +157,11 @@ public class UserInterface extends LoginLogout {
                         case 3:
                             System.out.printf("%15s%15s%15s%15s\n", "Date", "Payee", "Amount", "Category");
                             System.out.println("---------------------------------------------------------");
+                            for(FinancialDate f : expenseRecord.keySet()){
+                                String record = expenseRecord.get(f).toString();
+                                String fDate = f.toString();
+                                System.out.println(fDate + record);
+                            }
                             break;
                         case 4:
                             System.out.println("Annual Summary");

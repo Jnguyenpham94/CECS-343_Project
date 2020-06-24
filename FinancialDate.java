@@ -44,13 +44,14 @@ public class FinancialDate
 		this.day = day;
 	}
 	
+	@Override
 	public String toString()
 	{
 		String yearString = String.format("%04d", year);
 		String monthString = String.format("%02d", month);
 		String dayString = String.format("%02d", day);
 		
-		String fdateString = yearString + "-" + monthString + "-" + dayString;
+		String fdateString =  dayString + "-" + monthString + "-" + yearString;
 		return fdateString;
 			
 	}

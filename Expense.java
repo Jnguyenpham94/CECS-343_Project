@@ -74,14 +74,14 @@ public class Expense {
 		this.budgetCategory = budgetCategory;
 	}
 
+	@Override
 	public String toString() {
 		double temp = amountPaid;
 		DecimalFormat df = new DecimalFormat("#.00");
 		String amountString = String.valueOf(df.format(temp));
 		// String amountString = String.format("%2f", amountPaid);
 
-		String expenseString = String.format("%15s%15s%15s%15s\n", date.toString(), payee, amountString,
-				budgetCategory);
+		String expenseString = String.format("%15s%15s%15s\n", payee, amountString, budgetCategory);
 
 		return expenseString;
 	}
