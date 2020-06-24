@@ -81,7 +81,7 @@ public class Expense {
 		String amountString = String.valueOf(df.format(temp));
 		// String amountString = String.format("%2f", amountPaid);
 
-		String expenseString = String.format("%15s%15s%15s\n", payee, amountString, budgetCategory);
+		String expenseString = String.format(" " +"%10s%16s%22s\n", payee, amountString, budgetCategory);
 
 		return expenseString;
 	}

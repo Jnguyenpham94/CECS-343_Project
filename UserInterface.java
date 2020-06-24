@@ -155,7 +155,7 @@ public class UserInterface extends LoginLogout {
                             System.out.println("---------------------------------------------------------");
                             break;
                         case 3:
-                            System.out.printf("%15s%15s%15s%15s\n", "Date", "Payee", "Amount", "Category");
+                            System.out.printf("%2s%16s%18s%22s\n", "Date", "Payee", "Amount", "Category");
                             System.out.println("---------------------------------------------------------");
                             for(FinancialDate f : expenseRecord.keySet()){
                                 String record = expenseRecord.get(f).toString();
