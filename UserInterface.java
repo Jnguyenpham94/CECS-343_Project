@@ -152,6 +152,12 @@ public class UserInterface extends LoginLogout {
                         case 2:
                             System.out.println("AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec");
                             System.out.println("---------------------------------------------------------");
+                            if(!tenantList.isEmpty()){
+                                for(Integer i : tenantList.keySet()){
+                                    String aptNum = i.toString();
+                                    System.out.println(aptNum + "  " + tenantList.get(i).rent.toString());
+                                }
+                            }
                             break;
                         case 3:
                             System.out.printf("%2s%16s%18s%22s\n", "Date", "Payee", "Amount", "Category");
