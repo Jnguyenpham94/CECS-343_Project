@@ -77,14 +77,16 @@ public class UserInterface extends LoginLogout {
                             addToTenantList(fName, lName, aptNum, data);
                             break;
                         case 2:
-                            System.out.println("Enter Tenant's apartment number: ");
-                            int search = data.nextInt();
-                            tenantApartment(search,data);
-                            System.out.println("Enter amount paid (345.67):");
-                            double amountPaid = data.nextDouble();
-                            System.out.println("Enter month rent is for (1-12): ");
-                            int monthPaid = data.nextInt();
-                            addTenantRentPayment(search, amountPaid, monthPaid, data);
+                            if(!tenantList.isEmpty()) {
+                                System.out.println("Enter Tenant's apartment number: ");
+                                int search = data.nextInt();
+                                tenantApartment(search, data);
+                                System.out.println("Enter amount paid (345.67):");
+                                double amountPaid = data.nextDouble();
+                                System.out.println("Enter month rent is for (1-12): ");
+                                int monthPaid = data.nextInt();
+                                addTenantRentPayment(search, amountPaid, monthPaid, data);
+                            } else System.out.println("There are no existing Tenants.");
                             break;
                         case 3:
                             System.out.println("Enter day (1-31): ");
