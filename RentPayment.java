@@ -40,6 +40,5 @@ public class RentPayment {
     public void setRentPayment(RentPayment rp){
         this.rentPayment = rp;
     }
-
 }
 

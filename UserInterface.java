@@ -207,7 +207,7 @@ public class UserInterface extends LoginLogout {
             System.out.println("Cannot add more tenants apartment at capacity!!!");
         }
     }
-
+    //Checks if apartment is vacant to add rent payment
     public void tenantApartment(int aptNum, Scanner in){
         while(!tenantList.containsKey(aptNum)){
             System.out.println("Apartment is vacant. Please enter the tenant's apartment number: ");
@@ -215,6 +215,7 @@ public class UserInterface extends LoginLogout {
         }
     }
 
+    //Adds rent payment
     private void addTenantRentPayment(int tenantApt, double amount, int month, Scanner in){
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataInput = in.next();
