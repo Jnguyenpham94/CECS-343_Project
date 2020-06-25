@@ -8,7 +8,7 @@ public class RentPayment {
     }
 
     public void addPayment(double amountPaid, int monthPaid){
-        monthlyRent[monthPaid] = amountPaid;
+        monthlyRent[monthPaid] += amountPaid;
     }
 
     public double[] getMonthlyRent() {
