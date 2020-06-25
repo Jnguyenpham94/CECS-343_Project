@@ -174,14 +174,7 @@ public class UserInterface extends LoginLogout {
                         case 4:
                             System.out.println("Annual Summary");
                             System.out.println("---------------");
-                            double income = 0;
-                            if(!tenantList.isEmpty()){
-                                for(Integer i : tenantList.keySet()){
-                                    income += tenantList.get(i).rent.getYearlyRent();
-                                }
-                                System.out.println("Income");
-                                System.out.println(income);
-                            } else System.out.println("No Annual Summary.");
+                            displayAnnualRent();
                             break;
                         default:
                             System.out.println("Invalid input.");
@@ -253,6 +246,18 @@ public class UserInterface extends LoginLogout {
           
         Collections.sort(sortedKeys);  
         return sortedKeys;
-    } 
+    }
+
+    //Displays Annual Rent
+    public void displayAnnualRent(){
+        double income = 0;
+        if(!tenantList.isEmpty()){
+            for(Integer i : tenantList.keySet()){
+                income += tenantList.get(i).rent.getYearlyRent();
+            }
+            System.out.println("Income");
+            System.out.println(income);
+        } else System.out.println("No Annual Summary.");
+    }
 }
 
