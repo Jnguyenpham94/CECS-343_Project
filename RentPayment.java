@@ -15,6 +15,14 @@ public class RentPayment {
         return monthlyRent;
     }
 
+    public double getYearlyRent(){
+        int sum = 0;
+        for (double rent : monthlyRent) {
+            sum += rent;
+        }
+        return sum;
+    }
+
     @Override
     public String toString() {
         String s = "";
