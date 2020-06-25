@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -153,7 +155,8 @@ public class UserInterface extends LoginLogout {
                             System.out.println("AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec");
                             System.out.println("---------------------------------------------------------");
                             if(!tenantList.isEmpty()){
-                                for(Integer i : tenantList.keySet()){
+                                var sortedAptList = sortByKey(tenantList);
+                                for(Integer i : sortedAptList){
                                     String aptNum = i.toString();
                                     System.out.println(aptNum + "  " + tenantList.get(i).rent.toString());
                                 }
@@ -231,4 +234,17 @@ public class UserInterface extends LoginLogout {
             tenantList.get(tenantApt).rent.addPayment(amount,month-1);
         }
     }
+
+    // Sort tenntList by keys
+    private ArrayList<Integer> sortByKey(HashMap<Integer,Tenant> TL) 
+    { 
+        ArrayList<Integer> sortedKeys = 
+                    new ArrayList<Integer>();
+        
+        sortedKeys.addAll(TL.keySet());
+          
+        Collections.sort(sortedKeys);  
+        return sortedKeys;
+    } 
 }
+
