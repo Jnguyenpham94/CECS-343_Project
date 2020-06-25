@@ -5,6 +5,7 @@ public class Tenant
 	private String LastName;
 	private int aptNumber;
 	private double currentRentPaid;
+	RentPayment rent;
 	//private ArrayList<Finances> rentPaymentHistory;
 	
 	public Tenant()
@@ -17,6 +18,7 @@ public class Tenant
 		this.firstName = first;
 		this.LastName = last;
 		this.aptNumber = aptNum;
+		rent = new RentPayment();
 	}
 
 	public String getFirstName() {

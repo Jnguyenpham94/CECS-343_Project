@@ -77,17 +77,14 @@ public class UserInterface extends LoginLogout {
                             addToTenantList(fName, lName, aptNum, data);
                             break;
                         case 2:
-                            System.out.println("Enter Tenant's name: ");
-                            String tenantName = data.nextLine();
+                            System.out.println("Enter Tenant's apartment number: ");
+                            int search = data.nextInt();
+                            tenantApartment(search,data);
                             System.out.println("Enter amount paid (345.67):");
                             double amountPaid = data.nextDouble();
                             System.out.println("Enter month rent is for (1-12): ");
                             int monthPaid = data.nextInt();
-                            System.out.println("Enter 'i' to input data, any other key to throw away.");
-                            String dataRentInput = data.next();
-                            if (dataRentInput.equals("i")) {
-                                RentPayment newRentRecord = new RentPayment(tenantName, amountPaid, monthPaid);
-                            }
+                            addTenantRentPayment(search, amountPaid, monthPaid, data);
                             break;
                         case 3:
                             System.out.println("Enter day (1-31): ");
@@ -129,11 +126,11 @@ public class UserInterface extends LoginLogout {
                     displayMenu();
                     // subChoice = input.next().charAt(0);
                     subChoice = input.nextInt();
-                    if (subChoice != 1 && subChoice != 2 && subChoice != 3) {
+                    if (subChoice != 1 && subChoice != 2 && subChoice != 3 && subChoice != 4) {
                         do {
                             System.out.println("Enter a valid task: ");
                             subChoice = input.nextInt();
-                        } while (subChoice != 1 && subChoice != 2 && subChoice != 3);
+                        } while (subChoice != 1 && subChoice != 2 && subChoice != 3 && subChoice != 4);
                     }
                     // Submenu for displaying data
                     switch (subChoice) {
@@ -208,6 +205,21 @@ public class UserInterface extends LoginLogout {
             }
         } else {
             System.out.println("Cannot add more tenants apartment at capacity!!!");
+        }
+    }
+
+    public void tenantApartment(int aptNum, Scanner in){
+        while(!tenantList.containsKey(aptNum)){
+            System.out.println("Apartment is vacant. Please enter the tenant's apartment number: ");
+            aptNum = in.nextInt();
+        }
+    }
+
+    private void addTenantRentPayment(int tenantApt, double amount, int month, Scanner in){
+        System.out.println("Enter 'i' to input data, any other key to throw away.");
+        String dataInput = in.next();
+        if (dataInput.equals("i")) {
+            tenantList.get(tenantApt).rent.addPayment(amount,month-1);
         }
     }
 }
