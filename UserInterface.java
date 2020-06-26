@@ -8,6 +8,8 @@ public class UserInterface extends LoginLogout {
     HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
         private static final long serialVersionUID = 1L;};
     HashMap<FinancialDate, Expense> expenseRecord = new HashMap<FinancialDate, Expense>();
+    HashMap<String, Double> expensePerCategory = new HashMap<>();
+    double totalExpense; 
 
     public UserInterface() {
 
@@ -175,6 +177,9 @@ public class UserInterface extends LoginLogout {
                             System.out.println("Annual Summary");
                             System.out.println("---------------");
                             displayAnnualRent();
+                            calculateAnualExpense();
+                            displayAnualExpense();
+                            System.out.println();
                             break;
                         default:
                             System.out.println("Invalid input.");
@@ -248,7 +253,7 @@ public class UserInterface extends LoginLogout {
         return sortedKeys;
     }
 
-    //Displays Annual Rent
+    // Displays Annual Rent
     public void displayAnnualRent(){
         double income = 0;
         if(!tenantList.isEmpty()){
@@ -258,6 +263,28 @@ public class UserInterface extends LoginLogout {
             System.out.println("Income");
             System.out.println(income);
         } else System.out.println("No Annual Summary.");
+    }
+
+    // Calculate Anual Expense
+    private void calculateAnualExpense(){ 
+        for (Expense expense : expenseRecord.values()){ 
+            var category = expense.getBudgetCategory();
+            var amountPaid = expense.getAmountPaid();
+            if (expensePerCategory.containsKey(category)){ 
+                expensePerCategory.put(category, expensePerCategory.get(category) + amountPaid);
+            }else { 
+                expensePerCategory.put(category, amountPaid);
+            }
+            totalExpense += amountPaid;
+        }
+    }
+
+    // Display Anual Expense
+    private void displayAnualExpense(){
+        System.out.println("Expenses");
+        for (var category : expensePerCategory.keySet()){ 
+            System.out.printf("%s: %.2f\n", category, expensePerCategory.get(category));
+        }
     }
 }
 
