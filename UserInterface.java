@@ -9,7 +9,8 @@ public class UserInterface extends LoginLogout {
         private static final long serialVersionUID = 1L;};
     HashMap<FinancialDate, Expense> expenseRecord = new HashMap<FinancialDate, Expense>();
     HashMap<String, Double> expensePerCategory = new HashMap<>();
-    double totalExpense; 
+    private double totalExpense; 
+    private double totalIncome; 
 
     public UserInterface() {
 
@@ -113,6 +114,7 @@ public class UserInterface extends LoginLogout {
                                 Expense ex = new Expense(expenseDate, payee, amount, category);
                                 expenseRecord.put(expenseDate, ex);
                                 calculateAnualExpense();
+                                totalExpense += amount;
                             }
                             break;
                         default:
@@ -177,10 +179,14 @@ public class UserInterface extends LoginLogout {
                         case 4:
                             System.out.println("Annual Summary");
                             System.out.println("---------------");
-                            displayAnnualRent();
-                            displayAnualExpense();
-                            System.out.println();
-                            break;
+                            if(!tenantList.isEmpty())
+                                displayAnnualRent();
+                            if (!expensePerCategory.isEmpty())
+                                displayAnualExpense();
+                            if (tenantList.isEmpty() && expensePerCategory.isEmpty())
+                                System.out.println("No Annual Summary.");
+                            System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
+                        break;
                         default:
                             System.out.println("Invalid input.");
                     }
@@ -238,6 +244,7 @@ public class UserInterface extends LoginLogout {
         String dataInput = in.next();
         if (dataInput.equals("i")) {
             tenantList.get(tenantApt).rent.addPayment(amount,month-1);
+            totalIncome += amount;
         }
     }
 
@@ -255,14 +262,14 @@ public class UserInterface extends LoginLogout {
 
     // Displays Annual Rent
     public void displayAnnualRent(){
-        double income = 0;
-        if(!tenantList.isEmpty()){
-            for(Integer i : tenantList.keySet()){
-                income += tenantList.get(i).rent.getYearlyRent();
-            }
+        // double income = 0;
+        // if(!tenantList.isEmpty()){
+        //     for(Integer i : tenantList.keySet()){
+        //         income += tenantList.get(i).rent.getYearlyRent();
+        //     }
             System.out.println("Income");
-            System.out.println(income);
-        } else System.out.println("No Annual Summary.");
+            System.out.println(totalIncome);
+        //} else System.out.println("No Annual Summary.");
     }
 
     // Calculate Anual Expense
@@ -276,7 +283,6 @@ public class UserInterface extends LoginLogout {
             }else { 
                 expensePerCategory.put(category, amountPaid);
             }
-            totalExpense += amountPaid;
         }
     }
 
