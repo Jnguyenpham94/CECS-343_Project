@@ -112,6 +112,7 @@ public class UserInterface extends LoginLogout {
                                 FinancialDate expenseDate = new FinancialDate(year, month, day);
                                 Expense ex = new Expense(expenseDate, payee, amount, category);
                                 expenseRecord.put(expenseDate, ex);
+                                calculateAnualExpense();
                             }
                             break;
                         default:
@@ -177,7 +178,6 @@ public class UserInterface extends LoginLogout {
                             System.out.println("Annual Summary");
                             System.out.println("---------------");
                             displayAnnualRent();
-                            calculateAnualExpense();
                             displayAnualExpense();
                             System.out.println();
                             break;
@@ -267,6 +267,7 @@ public class UserInterface extends LoginLogout {
 
     // Calculate Anual Expense
     private void calculateAnualExpense(){ 
+        expensePerCategory.clear();
         for (Expense expense : expenseRecord.values()){ 
             var category = expense.getBudgetCategory();
             var amountPaid = expense.getAmountPaid();
