@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 public class Tenant 
 {
 	private String firstName;
@@ -58,14 +58,4 @@ public class Tenant
 		return getFirstName() + " " + getLastName();
 	}
 
-	//TODO: Maybed delete these 2 methods
-	/*
-	public ArrayList<Finances> getRentPaymentHistory() {
-		return rentPaymentHistory;
-	}
-
-	public void setRentPaymentHistory(ArrayList<Finances> rentPaymentHistory) {
-		this.rentPaymentHistory = rentPaymentHistory;
-	}
-	*/
 }
