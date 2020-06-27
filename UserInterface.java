@@ -238,8 +238,12 @@ public class UserInterface extends LoginLogout {
                 FileWriter fileE = new FileWriter("ExpenseRecord.txt");
                 fileE.append(expenseRecord.toString());
                 fileE.close();
-
-            } 
+                FileWriter fileR = new FileWriter("RentPayments.txt");
+                for(Integer i : tenantList.keySet()){
+                    fileR.append(String.valueOf(tenantList.get(i).getAptNumber())).append(" ").append(tenantList.get(i).rent.toString()).append("\n");
+                }
+                fileR.close();
+            }
             catch (IOException e) {
                 System.out.println("File Not Found!");
             }
