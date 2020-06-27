@@ -85,7 +85,7 @@ public class UserInterface extends LoginLogout {
                             if(!tenantList.isEmpty()) {
                                 System.out.println("Enter Tenant's apartment number: ");
                                 int search = data.nextInt();
-                                tenantApartment(search, data);
+                                search = tenantApartment(search, data);
                                 System.out.println("Enter amount paid (345.67):");
                                 double amountPaid = data.nextDouble();
                                 System.out.println("Enter month rent is for (1-12): ");
@@ -157,13 +157,15 @@ public class UserInterface extends LoginLogout {
                             }
                             break;
                         case 2:
-                            System.out.println("AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec");
-                            System.out.println("---------------------------------------------------------");
+                            System.out.println("AptNo    Jan    Feb    Mar    Apr    May    Jun    Jul    Aug    Sep    Oct    Nov    Dec");
+                            System.out.println("-----------------------------------------------------------------------------------------");
                             if(!tenantList.isEmpty()){
                                 var sortedAptList = sortByKey(tenantList);
                                 for(Integer i : sortedAptList){
                                     String aptNum = i.toString();
-                                    System.out.println(aptNum + "  " + tenantList.get(i).rent.toString());
+                                    String rentDisplay = String.format("%5s %s", aptNum, tenantList.get(i).rent.toString());
+                                    System.out.println(rentDisplay);
+                                    // System.out.println(aptNum + "  " + tenantList.get(i).rent.toString());
                                 }
                             }
                             break;
@@ -231,11 +233,12 @@ public class UserInterface extends LoginLogout {
         }
     }
     //Checks if apartment is vacant to add rent payment
-    public void tenantApartment(int aptNum, Scanner in){
+    public int tenantApartment(int aptNum, Scanner in){
         while(!tenantList.containsKey(aptNum)){
             System.out.println("Apartment is vacant. Please enter the tenant's apartment number: ");
             aptNum = in.nextInt();
         }
+        return aptNum;
     }
 
     //Adds rent payment

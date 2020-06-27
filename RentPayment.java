@@ -27,7 +27,7 @@ public class RentPayment {
     public String toString() {
         String s = "";
         for(Double rent : monthlyRent){
-            s += rent + " ";
+            s += String.format("%6.1f ", rent);
         }
         return s;
     }
