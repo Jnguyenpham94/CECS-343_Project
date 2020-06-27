@@ -1,1 +1,1 @@
-{101=George Smith, 103=Charles Wolf, 202=Preston Drake}
+{101=George Smith}

@@ -6,7 +6,6 @@ public class Tenant
 	private int aptNumber;
 	private double currentRentPaid;
 	RentPayment rent;
-	//private ArrayList<Finances> rentPaymentHistory;
 	
 	public Tenant()
 	{

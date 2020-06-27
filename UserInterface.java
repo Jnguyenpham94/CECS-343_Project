@@ -215,17 +215,16 @@ public class UserInterface extends LoginLogout {
         } while (choice != 3);
     }
 
+    //TODO: need to load in the data from the files back into program
     public void loadData(){
-        String line;
         System.out.println("Loading data from previous session");
         try {
-            BufferedReader fileR = new BufferedReader(new FileReader("TenantList.txt"));
-            while(fileR.readLine() != null) {
-                
-            }
+            BufferedReader readT = new BufferedReader(new FileReader("TenantList.txt"));
+            readT.close();
         } catch (Exception e) {
             System.out.println("File not Found!");
         }
+        
     }
     public void saveData(Scanner input) {
         System.out.println("Do you want to save the inputted data y/n?");

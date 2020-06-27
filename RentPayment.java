@@ -1,7 +1,6 @@
 public class RentPayment {
     private int aptID;
     private double[] monthlyRent;
-    private RentPayment rentPayment;
 
     public RentPayment(){
         monthlyRent = new double[12];
@@ -40,13 +39,4 @@ public class RentPayment {
         this.aptID = id;
     }
 
-
-    public RentPayment getRentPayment(){
-        return rentPayment;
-    }
-
-    public void setRentPayment(RentPayment rp){
-        this.rentPayment = rp;
-    }
 }
-
