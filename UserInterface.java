@@ -2,15 +2,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
 
 public class UserInterface extends LoginLogout {
     final int CAPACITY = 20;
     HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
-        private static final long serialVersionUID = 1L;};
+        private static final long serialVersionUID = 1L;
+    };
     HashMap<FinancialDate, Expense> expenseRecord = new HashMap<FinancialDate, Expense>();
     HashMap<String, Double> expensePerCategory = new HashMap<>();
-    private double totalExpense; 
-    private double totalIncome; 
+    private double totalExpense;
+    private double totalIncome;
 
     public UserInterface() {
 
@@ -18,6 +23,7 @@ public class UserInterface extends LoginLogout {
 
     public void Menu() {
         System.out.println("Login Successful");
+        //loadData();
         mainMenu();
         userInput();
     }
@@ -82,7 +88,7 @@ public class UserInterface extends LoginLogout {
                             addToTenantList(fName, lName, aptNum, data);
                             break;
                         case 2:
-                            if(!tenantList.isEmpty()) {
+                            if (!tenantList.isEmpty()) {
                                 System.out.println("Enter Tenant's apartment number: ");
                                 int search = data.nextInt();
                                 search = tenantApartment(search, data);
@@ -91,7 +97,8 @@ public class UserInterface extends LoginLogout {
                                 System.out.println("Enter month rent is for (1-12): ");
                                 int monthPaid = data.nextInt();
                                 addTenantRentPayment(search, amountPaid, monthPaid, data);
-                            } else System.out.println("There are no existing Tenants.");
+                            } else
+                                System.out.println("There are no existing Tenants.");
                             break;
                         case 3:
                             System.out.println("Enter day (1-31): ");
@@ -149,22 +156,25 @@ public class UserInterface extends LoginLogout {
                             }
                             break;
                         case 2:
-                            System.out.println("AptNo    Jan    Feb    Mar    Apr    May    Jun    Jul    Aug    Sep    Oct    Nov    Dec");
-                            System.out.println("-----------------------------------------------------------------------------------------");
-                            if(!tenantList.isEmpty()){
+                            System.out.println(
+                                    "AptNo    Jan    Feb    Mar    Apr    May    Jun    Jul    Aug    Sep    Oct    Nov    Dec");
+                            System.out.println(
+                                    "-----------------------------------------------------------------------------------------");
+                            if (!tenantList.isEmpty()) {
                                 var sortedAptList = sortByKey(tenantList);
-                                for(Integer i : sortedAptList){
+                                for (Integer i : sortedAptList) {
                                     String aptNum = i.toString();
-                                    String rentDisplay = String.format("%5s %s", aptNum, tenantList.get(i).rent.toString());
+                                    String rentDisplay = String.format("%5s %s", aptNum,
+                                            tenantList.get(i).rent.toString());
                                     System.out.println(rentDisplay);
-                                    // System.out.println(aptNum + "  " + tenantList.get(i).rent.toString());
+                                    // System.out.println(aptNum + " " + tenantList.get(i).rent.toString());
                                 }
                             }
                             break;
                         case 3:
                             System.out.printf("%2s%15s%17s%22s\n", "Date", "Payee", "Amount", "Category");
                             System.out.println("---------------------------------------------------------");
-                            for(FinancialDate f : expenseRecord.keySet()){
+                            for (FinancialDate f : expenseRecord.keySet()) {
                                 String record = expenseRecord.get(f).toString();
                                 String fDate = f.toString();
                                 System.out.println(fDate + record);
@@ -173,14 +183,14 @@ public class UserInterface extends LoginLogout {
                         case 4:
                             System.out.println("Annual Summary");
                             System.out.println("---------------");
-                            if(!tenantList.isEmpty())
+                            if (!tenantList.isEmpty())
                                 displayAnnualRent();
                             if (!expensePerCategory.isEmpty())
                                 displayAnnualExpense();
                             if (tenantList.isEmpty() && expensePerCategory.isEmpty())
                                 System.out.println("No Annual Summary.");
                             System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
-                        break;
+                            break;
                         default:
                             System.out.println("Invalid input.");
                     }
@@ -194,8 +204,9 @@ public class UserInterface extends LoginLogout {
                     }
                     break;
                 case 3:
-                    System.out.println("Logging out.");
+                    saveData(input);
                     input.close();
+                    logout();
                     break;
                 default:
                     System.out.println("Invalid option.");
@@ -204,7 +215,37 @@ public class UserInterface extends LoginLogout {
         } while (choice != 3);
     }
 
+    public void loadData(){
+        String line;
+        System.out.println("Loading data from previous session");
+        try {
+            BufferedReader fileR = new BufferedReader(new FileReader("TenantList.txt"));
+            while(fileR.readLine() != null) {
+                
+            }
+        } catch (Exception e) {
+            System.out.println("File not Found!");
+        }
+    }
+    public void saveData(Scanner input) {
+        System.out.println("Do you want to save the inputted data y/n?");
+        String option = input.next();
+        if (option.equalsIgnoreCase("y")) {
+            try {
+                FileWriter fileT = new FileWriter("TenantList.txt");
+                fileT.append(tenantList.toString());
+                fileT.close();
+                FileWriter fileE = new FileWriter("ExpenseRecord.txt");
+                fileE.append(expenseRecord.toString());
+                fileE.close();
 
+            } 
+            catch (IOException e) {
+                System.out.println("File Not Found!");
+            }
+        }
+
+    }
 
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error

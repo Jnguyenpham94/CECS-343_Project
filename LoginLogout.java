@@ -24,7 +24,9 @@ public class LoginLogout {
         }
         UserInterface ui = new UserInterface();
         ui.Menu();
+        ui.saveData(obj);
         obj.close();
+        logout();
     }
 
     public void promptUsername() {
