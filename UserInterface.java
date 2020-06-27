@@ -107,15 +107,7 @@ public class UserInterface extends LoginLogout {
                             String payee = data.nextLine();
                             System.out.println("Enter amount (39.95): ");
                             double amount = data.nextDouble();
-                            System.out.println("Enter 'i' to input data, any other key to throw away.");
-                            String dataExpenseInput = data.next();
-                            if(dataExpenseInput.equals("i")){
-                                FinancialDate expenseDate = new FinancialDate(year, month, day);
-                                Expense ex = new Expense(expenseDate, payee, amount, category);
-                                expenseRecord.put(expenseDate, ex);
-                                calculateAnualExpense();
-                                totalExpense += amount;
-                            }
+                            addToExpenseRecord(day, month, year, category, payee, amount, data);
                             break;
                         default:
                             System.out.println("Invalid input");
@@ -170,7 +162,7 @@ public class UserInterface extends LoginLogout {
                             }
                             break;
                         case 3:
-                            System.out.printf("%2s%16s%18s%22s\n", "Date", "Payee", "Amount", "Category");
+                            System.out.printf("%2s%15s%17s%22s\n", "Date", "Payee", "Amount", "Category");
                             System.out.println("---------------------------------------------------------");
                             for(FinancialDate f : expenseRecord.keySet()){
                                 String record = expenseRecord.get(f).toString();
@@ -184,7 +176,7 @@ public class UserInterface extends LoginLogout {
                             if(!tenantList.isEmpty())
                                 displayAnnualRent();
                             if (!expensePerCategory.isEmpty())
-                                displayAnualExpense();
+                                displayAnnualExpense();
                             if (tenantList.isEmpty() && expensePerCategory.isEmpty())
                                 System.out.println("No Annual Summary.");
                             System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
@@ -211,6 +203,8 @@ public class UserInterface extends LoginLogout {
             }
         } while (choice != 3);
     }
+
+
 
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error
@@ -263,6 +257,20 @@ public class UserInterface extends LoginLogout {
         return sortedKeys;
     }
 
+    private void addToExpenseRecord(int day, int month, int year, String category, String payee, double amount,
+            Scanner data) {
+        System.out.println("Enter 'i' to input data, any other key to throw away.");
+        String dataExpenseInput = data.next();
+        if(dataExpenseInput.equals("i")){
+            FinancialDate expenseDate = new FinancialDate(year, month, day);
+            Expense ex = new Expense(expenseDate, payee, amount, category);
+            expenseRecord.put(expenseDate, ex);
+            calculateAnnualExpense();
+            totalExpense += amount;
+        }
+
+    }
+
     // Displays Annual Rent
     public void displayAnnualRent(){
         // double income = 0;
@@ -276,7 +284,7 @@ public class UserInterface extends LoginLogout {
     }
 
     // Calculate Anual Expense
-    private void calculateAnualExpense(){ 
+    private void calculateAnnualExpense(){ 
         expensePerCategory.clear();
         for (Expense expense : expenseRecord.values()){ 
             var category = expense.getBudgetCategory();
@@ -290,7 +298,7 @@ public class UserInterface extends LoginLogout {
     }
 
     // Display Anual Expense
-    private void displayAnualExpense(){
+    private void displayAnnualExpense(){
         System.out.println("Expenses");
         for (var category : expensePerCategory.keySet()){ 
             System.out.printf("%s: %.2f\n", category, expensePerCategory.get(category));

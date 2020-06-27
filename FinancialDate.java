@@ -51,7 +51,7 @@ public class FinancialDate
 		String monthString = String.format("%02d", month);
 		String dayString = String.format("%02d", day);
 		
-		String fdateString =  dayString + "-" + monthString + "-" + yearString;
+		String fdateString =  monthString + "-" + dayString + "-" + yearString;
 		return fdateString;
 			
 	}

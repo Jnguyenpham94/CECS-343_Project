@@ -1,7 +1,6 @@
 import java.text.DecimalFormat;
 
 public class Expense {
-	// private Finances financeObject; //includes the date and payment amount
 	private FinancialDate date;
 	private String payee;
 	private double amountPaid;
@@ -27,14 +26,6 @@ public class Expense {
 		amountPaid = ap;
 		budgetCategory = bc;
 	}
-
-	// TODO: Maybe delete these 2 methods
-	/*
-	 * public Finances getFinanceObject() { return financeObject; }
-	 * 
-	 * public void setFinanceObject(Finances financeObject) { this.financeObject =
-	 * financeObject; }
-	 */
 
 	public FinancialDate getDate() {
 		return date;
@@ -81,7 +72,7 @@ public class Expense {
 		String amountString = String.valueOf(df.format(temp));
 		// String amountString = String.format("%2f", amountPaid);
 
-		String expenseString = String.format(" " +"%10s%16s%22s\n", payee, amountString, budgetCategory);
+		String expenseString = String.format(" " +"%10s%14s%17s\n", payee, amountString, budgetCategory);
 
 		return expenseString;
 	}
