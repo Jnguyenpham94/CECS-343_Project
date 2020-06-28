@@ -231,6 +231,23 @@ public class UserInterface extends LoginLogout {
                 tenantList.put(key, new Tenant(value[0], value[1], key));
             }
             readT.close();
+
+            //TODO: Working on how to read rent payments into program
+            //Currently reads the payments for the first tenant. But causes "File Error!".
+            /*BufferedReader readR = new BufferedReader(new FileReader("RentPayments.txt"));
+            String line2;
+            while((line2 = readR.readLine()) != null){
+                String[] temp = line2.split("\\s+");
+                String firstNum = temp[0];
+                int aprtNum = Integer.parseInt(firstNum);
+                for(int m = 1; m <= temp.length; m++){
+                    String s = temp[m];
+                    double amount = Double.parseDouble(s);
+                    tenantList.get(aprtNum).rent.addPayment(amount,m-1);
+                }
+            }
+            readR.close();*/
+
         } catch (Exception e) {
             System.out.println("File Error!");
         }
