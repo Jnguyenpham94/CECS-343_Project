@@ -153,15 +153,7 @@ public class UserInterface extends LoginLogout {
                             displayExpenseRecord();
                             break;
                         case 4:
-                            System.out.println("Annual Summary");
-                            System.out.println("---------------");
-                            if (!tenantList.isEmpty())
-                                displayAnnualRent();
-                            if (!expensePerCategory.isEmpty())
-                                displayAnnualExpense();
-                            if (tenantList.isEmpty() && expensePerCategory.isEmpty())
-                                System.out.println("No Annual Summary.");
-                            System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
+                            displayAnnualSummary();
                             break;
                         default:
                             System.out.println("Invalid input.");
@@ -186,6 +178,7 @@ public class UserInterface extends LoginLogout {
             }
         } while (choice != 3);
     }
+
 
     // TODO: need to load in the data from the files back into program
     public void loadData() {
@@ -347,6 +340,18 @@ public class UserInterface extends LoginLogout {
             String fDate = f.toString();
             System.out.println(fDate + record);
         }
+    }
+
+    private void displayAnnualSummary() {
+        System.out.println("Annual Summary");
+        System.out.println("---------------");
+        if (!tenantList.isEmpty())
+            displayAnnualRent();
+        if (!expensePerCategory.isEmpty())
+            displayAnnualExpense();
+        if (tenantList.isEmpty() && expensePerCategory.isEmpty())
+            System.out.println("No Annual Summary.");
+        System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
     }
 
     // Displays Annual Rent
