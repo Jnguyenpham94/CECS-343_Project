@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class UserInterface extends LoginLogout {
     final int CAPACITY = 20;
@@ -23,7 +24,7 @@ public class UserInterface extends LoginLogout {
 
     public void Menu() {
         System.out.println("Login Successful");
-        //loadData();
+        loadData();
         mainMenu();
         userInput();
     }
@@ -220,22 +221,35 @@ public class UserInterface extends LoginLogout {
         System.out.println("Loading data from previous session");
         try {
             BufferedReader readT = new BufferedReader(new FileReader("TenantList.txt"));
+            String line;
+            while ((line = readT.readLine()) != null)
+            {
+                String parts = line.replaceAll("[\\[\\](){},]","");
+                String[] parts2 = parts.split("=");
+                Integer key = Integer.parseInt(parts2[0].trim());
+                String[] value = parts2[1].split(" ");
+                tenantList.put(key, new Tenant(value[0], value[1], key));
+            }
             readT.close();
         } catch (Exception e) {
-            System.out.println("File not Found!");
+            System.out.println("File Error!");
         }
         
     }
+    
     public void saveData(Scanner input) {
         System.out.println("Do you want to save the inputted data y/n?");
         String option = input.next();
         if (option.equalsIgnoreCase("y")) {
             try {
-                FileWriter fileT = new FileWriter("TenantList.txt");
-                fileT.append(tenantList.toString());
+                BufferedWriter fileT = new BufferedWriter(new FileWriter("TenantList.txt"));
+                for(HashMap.Entry<Integer, Tenant> entry : tenantList.entrySet()){
+                    fileT.write( entry.getKey() + "=" + entry.getValue() );
+                    fileT.newLine();
+                }
                 fileT.close();
-                FileWriter fileE = new FileWriter("ExpenseRecord.txt");
-                fileE.append(expenseRecord.toString());
+                BufferedWriter fileE = new BufferedWriter(new FileWriter("ExpenseRecord.txt"));
+                fileE.write(expenseRecord.toString());
                 fileE.close();
                 FileWriter fileR = new FileWriter("RentPayments.txt");
                 for(Integer i : tenantList.keySet()){
