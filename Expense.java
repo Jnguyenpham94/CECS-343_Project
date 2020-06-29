@@ -70,10 +70,20 @@ public class Expense {
 		double temp = amountPaid;
 		DecimalFormat df = new DecimalFormat("#.00");
 		String amountString = String.valueOf(df.format(temp));
-		// String amountString = String.format("%2f", amountPaid);
 
 		String expenseString = String.format(" " +"%10s%14s%17s\n", payee, amountString, budgetCategory);
 
 		return expenseString;
 	}
+
+	public String toStringExpense(){
+		double temp = amountPaid;
+		DecimalFormat df = new DecimalFormat("#.00");
+		String amountString = String.valueOf(df.format(temp));
+
+		String expenseString = String.format(" " +"%1s/%1s@%1s\n", payee, amountString, budgetCategory);
+
+		return expenseString;
+        
+    }
 }

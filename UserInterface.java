@@ -179,8 +179,6 @@ public class UserInterface extends LoginLogout {
         } while (choice != 3);
     }
 
-
-    // TODO: need to load in the data from the files back into program
     public void loadData() {
         System.out.println("Loading data from previous session");
         try {
@@ -198,40 +196,43 @@ public class UserInterface extends LoginLogout {
             System.out.println("File Tenant List Error!");
         }
 
-            // TODO: Working on how to read rent payments into program
-            // Currently reads the payments for the first tenant. But causes "File Error!".
-            /*
-             *try{
-             * BufferedReader readR = new BufferedReader(new
-             * FileReader("RentPayments.txt")); String line2; while((line2 =
-             * readR.readLine()) != null){ String[] temp = line2.split("\\s+"); String
-             * firstNum = temp[0]; int aprtNum = Integer.parseInt(firstNum); for(int m = 1;
-             * m <= temp.length; m++){ String s = temp[m]; double amount =
-             * Double.parseDouble(s); tenantList.get(aprtNum).rent.addPayment(amount,m-1); }
-             * } readR.close();
-             }
-             cate (Exception e){
-                 System.out.println("File Rent Record Error!")
-             }
-             */
-        // TODO: need to figure out how to process expense record back into program
+        // TODO: Working on how to read rent payments into program
+        // Currently reads the payments for the first tenant. But causes "File Error!".
         /*
-         * try { BufferedReader readE = new BufferedReader(new
-         * FileReader("ExpenseRecord.txt")); String line; while ((line =
-         * readE.readLine()) != null) { String parts =
-         * line.replaceAll("[\\[\\](){},]",""); parts = parts.replaceAll("[-]", " ");
-         * String[] parts2 = parts.split("="); String[] partsDate =
-         * parts2[0].split(" "); Integer month = Integer.parseInt(partsDate[0].trim());
-         * Integer day = Integer.parseInt(partsDate[1].trim()); Integer year =
-         * Integer.parseInt(partsDate[2].trim()); String partsPayee =
-         * parts2[1].split(" ").toString(); String partsAmount =
-         * parts2[3].split(" ").toString(); Double pAmount =
-         * Double.valueOf(partsAmount); String partsCategory =
-         * parts2[parts2.length-1].split(" ").toString(); FinancialDate upDate = new
-         * FinancialDate(year, month, day); expenseRecord.put(upDate, new
-         * Expense(upDate, partsPayee, pAmount, partsCategory)); } readE.close(); }
-         * catch (Exception e) { System.out.println("File Expense Record Error!"); }
+         * try{ BufferedReader readR = new BufferedReader(new
+         * FileReader("RentPayments.txt")); String line2; while((line2 =
+         * readR.readLine()) != null){ String[] temp = line2.split("\\s+"); String
+         * firstNum = temp[0]; int aprtNum = Integer.parseInt(firstNum); for(int m = 1;
+         * m <= temp.length; m++){ String s = temp[m]; double amount =
+         * Double.parseDouble(s); tenantList.get(aprtNum).rent.addPayment(amount,m-1); }
+         * } readR.close(); } cate (Exception e){
+         * System.out.println("File Rent Record Error!") }
          */
+        
+         // TODO: need to figure out how to process expense record back into program
+        try {
+            BufferedReader readE = new BufferedReader(new FileReader("ExpenseRecord.txt"));
+            String line;
+            while ((line = readE.readLine()) != null) {
+                String parts = line.replaceAll("[\\[\\](){},]", "");
+                parts = parts.replaceAll("[-]", " ");
+                String[] parts2 = parts.split("=");
+                String[] partsDate = parts2[0].split(" ");
+                Integer month = Integer.parseInt(partsDate[0].trim());
+                Integer day = Integer.parseInt(partsDate[1].trim());
+                Integer year = Integer.parseInt(partsDate[2].trim());
+                String[] partsAmount = parts2[1].split("@");
+                String[] partsPayee = partsAmount[0].split("/");
+                Double pAmount = Double.valueOf(partsPayee[1]);
+                String partsCategory = partsAmount[1];
+                FinancialDate upDate = new FinancialDate(year, month, day);
+                expenseRecord.put(upDate, new Expense(upDate, partsPayee[0].toString().trim(), pAmount, partsCategory));
+            }
+            readE.close();
+        } catch (Exception e) {
+            System.out.println("File Expense Record Error!");
+        }
+
     }
 
     public void saveData(Scanner input) {
@@ -246,7 +247,9 @@ public class UserInterface extends LoginLogout {
                 }
                 fileT.close();
                 BufferedWriter fileE = new BufferedWriter(new FileWriter("ExpenseRecord.txt"));
-                fileE.write(expenseRecord.toString());
+                for (HashMap.Entry<FinancialDate, Expense> entry : expenseRecord.entrySet()) {
+                    fileE.write(entry.getKey() + "=" + entry.getValue().toStringExpense());
+                }
                 fileE.close();
                 FileWriter fileR = new FileWriter("RentPayments.txt");
                 for (Integer i : tenantList.keySet()) {
@@ -260,6 +263,7 @@ public class UserInterface extends LoginLogout {
         }
 
     }
+
 
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error
