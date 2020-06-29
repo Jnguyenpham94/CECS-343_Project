@@ -210,6 +210,7 @@ public class UserInterface extends LoginLogout {
                     String s = temp[m];
                     double amount = Double.parseDouble(s);
                     tenantList.get(aprtNum).rent.addPayment(amount, m - 1);
+                    totalIncome += amount;
                 }
             }
             readR.close();
@@ -235,6 +236,8 @@ public class UserInterface extends LoginLogout {
                 String partsCategory = partsAmount[1];
                 FinancialDate upDate = new FinancialDate(year, month, day);
                 expenseRecord.put(upDate, new Expense(upDate, partsPayee[0].toString().trim(), pAmount, partsCategory));
+                calculateAnnualExpense();
+                totalExpense += pAmount;
             }
             readE.close();
         } catch (Exception e) {
