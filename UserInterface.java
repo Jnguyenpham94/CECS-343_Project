@@ -214,6 +214,24 @@ public class UserInterface extends LoginLogout {
                  System.out.println("File Rent Record Error!")
              }
              */
+        // TODO: need to figure out how to process expense record back into program
+        /*
+         * try { BufferedReader readE = new BufferedReader(new
+         * FileReader("ExpenseRecord.txt")); String line; while ((line =
+         * readE.readLine()) != null) { String parts =
+         * line.replaceAll("[\\[\\](){},]",""); parts = parts.replaceAll("[-]", " ");
+         * String[] parts2 = parts.split("="); String[] partsDate =
+         * parts2[0].split(" "); Integer month = Integer.parseInt(partsDate[0].trim());
+         * Integer day = Integer.parseInt(partsDate[1].trim()); Integer year =
+         * Integer.parseInt(partsDate[2].trim()); String partsPayee =
+         * parts2[1].split(" ").toString(); String partsAmount =
+         * parts2[3].split(" ").toString(); Double pAmount =
+         * Double.valueOf(partsAmount); String partsCategory =
+         * parts2[parts2.length-1].split(" ").toString(); FinancialDate upDate = new
+         * FinancialDate(year, month, day); expenseRecord.put(upDate, new
+         * Expense(upDate, partsPayee, pAmount, partsCategory)); } readE.close(); }
+         * catch (Exception e) { System.out.println("File Expense Record Error!"); }
+         */
     }
 
     public void saveData(Scanner input) {
