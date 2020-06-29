@@ -39,16 +39,16 @@ public class UserInterface extends LoginLogout {
     public void inputMenu() {
         System.out.println("Choose data you'd like to input: ");
         System.out.println("1. Add a tenant");
-        System.out.println("2. Record rent payment,");
+        System.out.println("2. Record rent payment");
         System.out.println("3. Record expense:");
     }
 
     public void displayMenu() {
         System.out.println("Choose a report: ");
-        System.out.println("1. Display tenants");
-        System.out.println("2. Display rents,");
-        System.out.println("3. Display expenses,");
-        System.out.println("4. Display annual report:");
+        System.out.println("1. Display Tenant List");
+        System.out.println("2. Display Rental Record");
+        System.out.println("3. Display Expense Record");
+        System.out.println("4. Display Anual Report");
     }
 
     public void userInput() {
@@ -196,9 +196,6 @@ public class UserInterface extends LoginLogout {
             System.out.println("File Tenant List Error!");
         }
 
-        // TODO: Working on how to read rent payments into program
-        // Currently reads the payments for the first tenant. But causes "File Error!".
-
         try {
             BufferedReader readR = new BufferedReader(new FileReader("RentPayments.txt"));
             String line2;
@@ -340,13 +337,13 @@ public class UserInterface extends LoginLogout {
     }
 
     private void displayTenantList() {
-        System.out.println("\nApt# Tenant name");
+        System.out.println("\nApt#  Tenant name");
         System.out.println("-------------------");
         if (!tenantList.isEmpty()) {
             for (Integer i : tenantList.keySet()) {
                 String aptNum = i.toString();
                 String person = tenantList.get(i).toString();
-                System.out.println(aptNum + " " + person);
+                System.out.printf("%4s  %s\n", aptNum, person);
             }
         } else {
             System.out.println("EMPTY Tenant List");
@@ -368,12 +365,12 @@ public class UserInterface extends LoginLogout {
     }
 
     private void displayExpenseRecord() {
-        System.out.printf("%2s%15s%17s%22s\n", "Date", "Payee", "Amount", "Category");
-        System.out.println("---------------------------------------------------------");
+        System.out.printf("%8s%19s%24s%20s\n", "Date", "Payee", "Amount", "Category");
+        System.out.println("-----------------------------------------------------------------------");
         for (FinancialDate f : expenseRecord.keySet()) {
             String record = expenseRecord.get(f).toString();
             String fDate = f.toString();
-            System.out.println(fDate + record);
+            System.out.printf("%11s%s", fDate, record);
         }
     }
 
@@ -397,7 +394,7 @@ public class UserInterface extends LoginLogout {
         // income += tenantList.get(i).rent.getYearlyRent();
         // }
         System.out.println("Income");
-        System.out.println(totalIncome);
+        System.out.println(totalIncome + "\n");
         // } else System.out.println("No Annual Summary.");
     }
 
@@ -421,5 +418,6 @@ public class UserInterface extends LoginLogout {
         for (var category : expensePerCategory.keySet()) {
             System.out.printf("%s: %.2f\n", category, expensePerCategory.get(category));
         }
+        System.out.println();
     }
 }

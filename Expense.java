@@ -71,7 +71,7 @@ public class Expense {
 		DecimalFormat df = new DecimalFormat("#.00");
 		String amountString = String.valueOf(df.format(temp));
 
-		String expenseString = String.format(" " +"%10s%14s%17s\n", payee, amountString, budgetCategory);
+		String expenseString = String.format("%20s%20s%20s\n", payee, amountString, budgetCategory);
 
 		return expenseString;
 	}
