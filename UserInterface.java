@@ -198,18 +198,26 @@ public class UserInterface extends LoginLogout {
 
         // TODO: Working on how to read rent payments into program
         // Currently reads the payments for the first tenant. But causes "File Error!".
-        /*
-         * try{ BufferedReader readR = new BufferedReader(new
-         * FileReader("RentPayments.txt")); String line2; while((line2 =
-         * readR.readLine()) != null){ String[] temp = line2.split("\\s+"); String
-         * firstNum = temp[0]; int aprtNum = Integer.parseInt(firstNum); for(int m = 1;
-         * m <= temp.length; m++){ String s = temp[m]; double amount =
-         * Double.parseDouble(s); tenantList.get(aprtNum).rent.addPayment(amount,m-1); }
-         * } readR.close(); } cate (Exception e){
-         * System.out.println("File Rent Record Error!") }
-         */
-        
-         // TODO: need to figure out how to process expense record back into program
+
+        try {
+            BufferedReader readR = new BufferedReader(new FileReader("RentPayments.txt"));
+            String line2;
+            while ((line2 = readR.readLine()) != null) {
+                String[] temp = line2.split("\\s+");
+                String firstNum = temp[0];
+                int aprtNum = Integer.parseInt(firstNum);
+                for (int m = 1; m <= temp.length -1; m++) {
+                    String s = temp[m];
+                    double amount = Double.parseDouble(s);
+                    tenantList.get(aprtNum).rent.addPayment(amount, m - 1);
+                }
+            }
+            readR.close();
+        } catch (Exception e) {
+            System.out.println("File Rent Record Error!");
+            e.printStackTrace();
+        }
+
         try {
             BufferedReader readE = new BufferedReader(new FileReader("ExpenseRecord.txt"));
             String line;
@@ -263,7 +271,6 @@ public class UserInterface extends LoginLogout {
         }
 
     }
-
 
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error
