@@ -216,15 +216,13 @@ public class UserInterface extends LoginLogout {
         } while (choice != 3);
     }
 
-    //TODO: need to load in the data from the files back into program
-    public void loadData(){
+    public void loadData() {
         System.out.println("Loading data from previous session");
         try {
             BufferedReader readT = new BufferedReader(new FileReader("TenantList.txt"));
             String line;
-            while ((line = readT.readLine()) != null)
-            {
-                String parts = line.replaceAll("[\\[\\](){},]","");
+            while ((line = readT.readLine()) != null) {
+                String parts = line.replaceAll("[\\[\\](){},]", "");
                 String[] parts2 = parts.split("=");
                 Integer key = Integer.parseInt(parts2[0].trim());
                 String[] value = parts2[1].split(" ");
@@ -232,59 +230,54 @@ public class UserInterface extends LoginLogout {
             }
             readT.close();
         } catch (Exception e) {
-            System.out.println("File Error!");
+            System.out.println("File Tenant List Error!");
         }
-        try {
-            BufferedReader readE = new BufferedReader(new FileReader("ExpenseRecord.txt"));
-            String line;
-            while ((line = readE.readLine()) != null)
-            {
-                String parts = line.replaceAll("[\\[\\](){},]","");
-                parts = parts.replaceAll("[-]", " ");
-                String[] parts2 = parts.split("=");
-                String[] partsDate = parts2[0].split(" ");
-                Integer month = Integer.parseInt(partsDate[0].trim());
-                Integer day = Integer.parseInt(partsDate[1].trim());
-                Integer year = Integer.parseInt(partsDate[2].trim());
-                String partsPayee = parts2[1].split(" ").toString();
-                String partsAmount = parts2[3].split(" ").toString();
-                Double pAmount = Double.valueOf(partsAmount);
-                String partsCategory = parts2[parts2.length-1].split(" ").toString();
-                FinancialDate upDate = new FinancialDate(year, month, day);
-                expenseRecord.put(upDate, new Expense(upDate, partsPayee, pAmount, partsCategory));
-            }
-            readE.close();
-        } catch (Exception e) {
-            System.out.println("File Load Error!");
-        }
-        
+        // TODO: need to figure out how to process expense record back into program
+        /*
+         * try { BufferedReader readE = new BufferedReader(new
+         * FileReader("ExpenseRecord.txt")); String line; while ((line =
+         * readE.readLine()) != null) { String parts =
+         * line.replaceAll("[\\[\\](){},]",""); parts = parts.replaceAll("[-]", " ");
+         * String[] parts2 = parts.split("="); String[] partsDate =
+         * parts2[0].split(" "); Integer month = Integer.parseInt(partsDate[0].trim());
+         * Integer day = Integer.parseInt(partsDate[1].trim()); Integer year =
+         * Integer.parseInt(partsDate[2].trim()); String partsPayee =
+         * parts2[1].split(" ").toString(); String partsAmount =
+         * parts2[3].split(" ").toString(); Double pAmount =
+         * Double.valueOf(partsAmount); String partsCategory =
+         * parts2[parts2.length-1].split(" ").toString(); FinancialDate upDate = new
+         * FinancialDate(year, month, day); expenseRecord.put(upDate, new
+         * Expense(upDate, partsPayee, pAmount, partsCategory)); } readE.close(); }
+         * catch (Exception e) { System.out.println("File Expense Record Error!"); }
+         */
+
     }
-    
+
     public void saveData(Scanner input) {
         System.out.println("Do you want to save the inputted data y/n?");
         String option = input.next();
         if (option.equalsIgnoreCase("y")) {
             try {
                 BufferedWriter fileT = new BufferedWriter(new FileWriter("TenantList.txt"));
-                for(HashMap.Entry<Integer, Tenant> entry : tenantList.entrySet()){
-                    fileT.write( entry.getKey() + "=" + entry.getValue() );
+                for (HashMap.Entry<Integer, Tenant> entry : tenantList.entrySet()) {
+                    fileT.write(entry.getKey() + "=" + entry.getValue());
                     fileT.newLine();
                 }
                 fileT.close();
                 BufferedWriter fileE = new BufferedWriter(new FileWriter("ExpenseRecord.txt"));
-                for(HashMap.Entry<FinancialDate, Expense> entry : expenseRecord.entrySet()){
-                    fileT.write( entry.getKey() + "***" + entry.getValue() );
+                for (HashMap.Entry<FinancialDate, Expense> entry : expenseRecord.entrySet()) {
+                    fileT.write(entry.getKey() + "***" + entry.getValue());
                     fileT.newLine();
                 }
-                //fileE.write(expenseRecord.toString().trim());
+                // fileE.write(expenseRecord.toString().trim());
                 fileE.close();
                 FileWriter fileR = new FileWriter("RentPayments.txt");
-                for(Integer i : tenantList.keySet()){
-                    fileR.append(String.valueOf(tenantList.get(i).getAptNumber())).append(" ").append(tenantList.get(i).rent.toString()).append("\n");
+                for (Integer i : tenantList.keySet()) {
+                    fileR.append(String.valueOf(tenantList.get(i).getAptNumber())).append(" ")
+                            .append(tenantList.get(i).rent.toString()).append("\n");
                 }
                 fileR.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println("File Not Found!");
             }
         }
@@ -311,34 +304,33 @@ public class UserInterface extends LoginLogout {
             System.out.println("Cannot add more tenants apartment at capacity!!!");
         }
     }
-    //Checks if apartment is vacant to add rent payment
-    public int tenantApartment(int aptNum, Scanner in){
-        while(!tenantList.containsKey(aptNum)){
+
+    // Checks if apartment is vacant to add rent payment
+    public int tenantApartment(int aptNum, Scanner in) {
+        while (!tenantList.containsKey(aptNum)) {
             System.out.println("Apartment is vacant. Please enter the tenant's apartment number: ");
             aptNum = in.nextInt();
         }
         return aptNum;
     }
 
-    //Adds rent payment
-    private void addTenantRentPayment(int tenantApt, double amount, int month, Scanner in){
+    // Adds rent payment
+    private void addTenantRentPayment(int tenantApt, double amount, int month, Scanner in) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataInput = in.next();
         if (dataInput.equals("i")) {
-            tenantList.get(tenantApt).rent.addPayment(amount,month-1);
+            tenantList.get(tenantApt).rent.addPayment(amount, month - 1);
             totalIncome += amount;
         }
     }
 
     // Sort tenntList by keys
-    private ArrayList<Integer> sortByKey(HashMap<Integer,Tenant> TL) 
-    { 
-        ArrayList<Integer> sortedKeys = 
-                    new ArrayList<Integer>();
-        
+    private ArrayList<Integer> sortByKey(HashMap<Integer, Tenant> TL) {
+        ArrayList<Integer> sortedKeys = new ArrayList<Integer>();
+
         sortedKeys.addAll(TL.keySet());
-          
-        Collections.sort(sortedKeys);  
+
+        Collections.sort(sortedKeys);
         return sortedKeys;
     }
 
@@ -346,7 +338,7 @@ public class UserInterface extends LoginLogout {
             Scanner data) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataExpenseInput = data.next();
-        if(dataExpenseInput.equals("i")){
+        if (dataExpenseInput.equals("i")) {
             FinancialDate expenseDate = new FinancialDate(year, month, day);
             Expense ex = new Expense(expenseDate, payee, amount, category);
             expenseRecord.put(expenseDate, ex);
@@ -357,37 +349,36 @@ public class UserInterface extends LoginLogout {
     }
 
     // Displays Annual Rent
-    public void displayAnnualRent(){
+    public void displayAnnualRent() {
         // double income = 0;
         // if(!tenantList.isEmpty()){
-        //     for(Integer i : tenantList.keySet()){
-        //         income += tenantList.get(i).rent.getYearlyRent();
-        //     }
-            System.out.println("Income");
-            System.out.println(totalIncome);
-        //} else System.out.println("No Annual Summary.");
+        // for(Integer i : tenantList.keySet()){
+        // income += tenantList.get(i).rent.getYearlyRent();
+        // }
+        System.out.println("Income");
+        System.out.println(totalIncome);
+        // } else System.out.println("No Annual Summary.");
     }
 
     // Calculate Anual Expense
-    private void calculateAnnualExpense(){ 
+    private void calculateAnnualExpense() {
         expensePerCategory.clear();
-        for (Expense expense : expenseRecord.values()){ 
+        for (Expense expense : expenseRecord.values()) {
             var category = expense.getBudgetCategory();
             var amountPaid = expense.getAmountPaid();
-            if (expensePerCategory.containsKey(category)){ 
+            if (expensePerCategory.containsKey(category)) {
                 expensePerCategory.put(category, expensePerCategory.get(category) + amountPaid);
-            }else { 
+            } else {
                 expensePerCategory.put(category, amountPaid);
             }
         }
     }
 
     // Display Anual Expense
-    private void displayAnnualExpense(){
+    private void displayAnnualExpense() {
         System.out.println("Expenses");
-        for (var category : expensePerCategory.keySet()){ 
+        for (var category : expensePerCategory.keySet()) {
             System.out.printf("%s: %.2f\n", category, expensePerCategory.get(category));
         }
     }
 }
-
