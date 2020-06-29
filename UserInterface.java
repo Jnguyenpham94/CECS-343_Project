@@ -194,10 +194,14 @@ public class UserInterface extends LoginLogout {
                 tenantList.put(key, new Tenant(value[0], value[1], key));
             }
             readT.close();
+        } catch (Exception e) {
+            System.out.println("File Tenant List Error!");
+        }
 
             // TODO: Working on how to read rent payments into program
             // Currently reads the payments for the first tenant. But causes "File Error!".
             /*
+             *try{
              * BufferedReader readR = new BufferedReader(new
              * FileReader("RentPayments.txt")); String line2; while((line2 =
              * readR.readLine()) != null){ String[] temp = line2.split("\\s+"); String
@@ -205,12 +209,11 @@ public class UserInterface extends LoginLogout {
              * m <= temp.length; m++){ String s = temp[m]; double amount =
              * Double.parseDouble(s); tenantList.get(aprtNum).rent.addPayment(amount,m-1); }
              * } readR.close();
+             }
+             cate (Exception e){
+                 System.out.println("File Rent Record Error!")
+             }
              */
-
-        } catch (Exception e) {
-            System.out.println("File Error!");
-        }
-
     }
 
     public void saveData(Scanner input) {
