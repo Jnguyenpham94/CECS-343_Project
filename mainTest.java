@@ -3,13 +3,48 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import java.util.Scanner;
+import java.util.HashMap;
+
 
 public class mainTest {
 
+/**
+ * All Tests should pass except testExpenseToStringExpense2()
+ * it was made to fail to test if the sets are working as intended
+ */
+
+    final int CAPACITY = 20;
     public UserInterface ui = new UserInterface();
     String[] args = {"Mary", "Shelley", "Tom", "& Jerry"};
     int[] aptNums = {100,101,201,301};
+    Scanner scan = new Scanner(System.in);
+    HashMap<Integer, Tenant> testTenantList = new HashMap<Integer, Tenant>(CAPACITY) {
+        private static final long serialVersionUID = 1L;
+    };
+    HashMap<Integer, Tenant> testTenantList2 = new HashMap<Integer, Tenant>(CAPACITY);
     
+
+    @Test
+    public void testOfTest(){
+        int x = 10;
+        assertTrue("x=10 is not equal to CAPACITY=20 variable", x != CAPACITY);
+    }
+
+    @Test
+    public void testTenantListSetUp(){
+        testTenantList.put(aptNums[0], new Tenant(args[2], args[3], aptNums[1]));
+        testTenantList2.put(aptNums[0], new Tenant(args[2], args[3], aptNums[1]));
+        assertFalse("TENANT LISTS ARE SETUP CORRECTLY IF PASS", testTenantList == testTenantList2);
+    }
+
+    @Test
+    public void testApartmentAvailability(){
+        testTenantList.put(aptNums[0], new Tenant(args[2], args[3], aptNums[1]));
+        ui.apartmentAvailability(aptNums[0], scan);
+        assertTrue("Apartment is occupied", aptNums[0] != aptNums[1]);
+    }
+
     @Test
     public void testTenantToString(){
         Tenant testTenant = new Tenant();
@@ -60,7 +95,7 @@ public class mainTest {
     }
 
     @Test
-    public void testExpenseToStringExpense2(){//test fails if the sets work... they do. when they are uncommented
+    public void testExpenseToStringExpense2(){//test fails if the sets work... they do when they are uncommented
         Expense testExpense = new Expense(101, 5, 25, "Bob the Builder", 1002.36, "Repairs");
         String payee = "Bob the Builder";
         testExpense.setPayee("Count Dracula");
@@ -70,7 +105,7 @@ public class mainTest {
         testExpense.setBudgetCategory("Utilitie");
         String expenseString = String.format(" " +"%1s/%1s@%1s\n", payee, amountString, budgetCategory);
 
-        assertEquals(expenseString, testExpense.toStringExpense());
+        assertEquals("THIS TEST SHOULD FAIL IF IT WORKS!!!!", expenseString, testExpense.toStringExpense());
     }
 
 }
