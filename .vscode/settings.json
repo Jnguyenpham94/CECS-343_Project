@@ -1,2 +1,10 @@
 {
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "lib/junit4.10/junit-4.10-src.jar"
+        ]
+    }
 }
