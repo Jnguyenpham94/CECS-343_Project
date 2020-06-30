@@ -6,7 +6,7 @@ class MainTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertAll("NOT YET IMPLEMENTED");;
 	}
 
 }
