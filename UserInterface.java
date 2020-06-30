@@ -388,14 +388,8 @@ public class UserInterface extends LoginLogout {
 
     // Displays Annual Rent
     public void displayAnnualRent() {
-        // double income = 0;
-        // if(!tenantList.isEmpty()){
-        // for(Integer i : tenantList.keySet()){
-        // income += tenantList.get(i).rent.getYearlyRent();
-        // }
         System.out.println("Income");
         System.out.println(totalIncome + "\n");
-        // } else System.out.println("No Annual Summary.");
     }
 
     // Calculate Anual Expense
