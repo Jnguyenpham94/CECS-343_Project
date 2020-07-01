@@ -1,3 +1,2 @@
-04-30-2020= IRS/600.00@Taxes
-29-06-2020= Big Electric Co/45.69@Utilities
-06-28-2020= Bob's Hardware/39.95@Repairs
+01-02-2020= City Water/978.00@Utilities
+02-15-2020= All State/4840.00@Insurance

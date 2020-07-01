@@ -112,7 +112,7 @@ public class UserInterface extends LoginLogout {
                             String lName = data.nextLine();
                             System.out.println("Enter tenant's apartment number (101):");
                             int aptNum = data.nextInt();
-                            apartmentAvailability(aptNum, data);
+                            aptNum = apartmentAvailability(aptNum, data);
                             addToTenantList(fName, lName, aptNum, data);
                             break;
                         case 2:
@@ -311,12 +311,13 @@ public class UserInterface extends LoginLogout {
      * @param aptNum
      * @param in
      */
-    public void apartmentAvailability(int aptNum, Scanner in) {
+    public int apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error
         while (tenantList.containsKey(aptNum)) {
             System.out.printf("Apartment %d is occupied. Please enter another apartment number: ", aptNum);
             aptNum = in.nextInt();
         }
+        return aptNum;
     }
 
     /**
