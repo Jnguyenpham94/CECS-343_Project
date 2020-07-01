@@ -8,20 +8,33 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
+/**
+ * UserInterface class allows the user to interact with
+ * the program
+ */
 public class UserInterface extends LoginLogout {
+    //Member variables
     final int CAPACITY = 20;
+    private double totalExpense;
+    private double totalIncome;
+    //Keeps track of the Tenants and which apartment numbers are occupied
     HashMap<Integer, Tenant> tenantList = new HashMap<Integer, Tenant>(CAPACITY) {
         private static final long serialVersionUID = 1L;
     };
+    //Keeps track of expenses
     HashMap<FinancialDate, Expense> expenseRecord = new HashMap<FinancialDate, Expense>();
+    //Contains the expense categories
     HashMap<String, Double> expensePerCategory = new HashMap<>();
-    private double totalExpense;
-    private double totalIncome;
 
+    /**
+     * Constructor
+     */
     public UserInterface() {
-
     }
 
+    /**
+     * Menu that calls the loadData, mainMenu, and userInput methods
+     */
     public void Menu() {
         System.out.println("Login Successful");
         loadData();
@@ -29,6 +42,9 @@ public class UserInterface extends LoginLogout {
         userInput();
     }
 
+    /**
+     * Displays the main menu to the user
+     */
     public void mainMenu() {
         System.out.println("Choose a task: ");
         System.out.println("1. Input data");
@@ -36,6 +52,10 @@ public class UserInterface extends LoginLogout {
         System.out.println("3. Logout");
     }
 
+    /**
+     * Displays the input menu for the user
+     * to choose what data they would like to input
+     */
     public void inputMenu() {
         System.out.println("Choose data you'd like to input: ");
         System.out.println("1. Add a tenant");
@@ -43,16 +63,23 @@ public class UserInterface extends LoginLogout {
         System.out.println("3. Record expense:");
     }
 
+    /**
+     * Displays the display menu for the user
+     * to choose what data they would like to see
+     */
     public void displayMenu() {
         System.out.println("Choose a report: ");
         System.out.println("1. Display Tenant List");
         System.out.println("2. Display Rental Record");
         System.out.println("3. Display Expense Record");
-        System.out.println("4. Display Anual Report");
+        System.out.println("4. Display Annual Report");
     }
 
+    /**
+     * The user can input data so the program can do
+     * what the user wants
+     */
     public void userInput() {
-
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
         // If invalid choice
@@ -179,6 +206,9 @@ public class UserInterface extends LoginLogout {
         } while (choice != 3);
     }
 
+    /**
+     * Loads the data that was previously inputted
+     */
     public void loadData() {
         System.out.println("Loading data from previous session");
         try {
@@ -243,6 +273,10 @@ public class UserInterface extends LoginLogout {
 
     }
 
+    /**
+     * Saves the data that was inputted by the user
+     * @param input
+     */
     public void saveData(Scanner input) {
         System.out.println("Do you want to save the inputted data y/n?");
         String option = input.next();
@@ -272,6 +306,11 @@ public class UserInterface extends LoginLogout {
 
     }
 
+    /**
+     * Checks if the apartment number is available
+     * @param aptNum
+     * @param in
+     */
     public void apartmentAvailability(int aptNum, Scanner in) {
         // Handle duplicate apartment number error
         while (tenantList.containsKey(aptNum)) {
@@ -280,6 +319,14 @@ public class UserInterface extends LoginLogout {
         }
     }
 
+    /**
+     * Adds the new Tenant and their apartment number to
+     * the tenantList
+     * @param fName
+     * @param lName
+     * @param aptNum
+     * @param in
+     */
     private void addToTenantList(String fName, String lName, int aptNum, Scanner in) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataInput = in.next();
@@ -293,7 +340,13 @@ public class UserInterface extends LoginLogout {
         }
     }
 
-    // Checks if apartment is vacant to add rent payment
+    /**
+     * Checks if the apartment number is vacant. An occupied apartment number
+     * will allow the user to continue
+     * @param aptNum
+     * @param in
+     * @return
+     */
     public int tenantApartment(int aptNum, Scanner in) {
         while (!tenantList.containsKey(aptNum)) {
             System.out.println("Apartment is vacant. Please enter the tenant's apartment number: ");
@@ -302,7 +355,14 @@ public class UserInterface extends LoginLogout {
         return aptNum;
     }
 
-    // Adds rent payment
+    /**
+     * Adds the Tenant's rent payment by calling the addPayment method
+     * from the RentPayment class.
+     * @param tenantApt
+     * @param amount
+     * @param month
+     * @param in
+     */
     private void addTenantRentPayment(int tenantApt, double amount, int month, Scanner in) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataInput = in.next();
@@ -312,7 +372,11 @@ public class UserInterface extends LoginLogout {
         }
     }
 
-    // Sort tenntList by keys
+    /**
+     * Sorts the tenantList by keys
+     * @param TL
+     * @return
+     */
     private ArrayList<Integer> sortByKey(HashMap<Integer, Tenant> TL) {
         ArrayList<Integer> sortedKeys = new ArrayList<Integer>();
 
@@ -322,8 +386,18 @@ public class UserInterface extends LoginLogout {
         return sortedKeys;
     }
 
+    /**
+     * Adds the expenses to expenseRecord
+     * @param day
+     * @param month
+     * @param year
+     * @param category
+     * @param payee
+     * @param amount
+     * @param data
+     */
     private void addToExpenseRecord(int day, int month, int year, String category, String payee, double amount,
-            Scanner data) {
+                                    Scanner data) {
         System.out.println("Enter 'i' to input data, any other key to throw away.");
         String dataExpenseInput = data.next();
         if (dataExpenseInput.equals("i")) {
@@ -336,6 +410,9 @@ public class UserInterface extends LoginLogout {
 
     }
 
+    /**
+     * Displays the Tenants and their apartment number
+     */
     private void displayTenantList() {
         System.out.println("\nApt#  Tenant name");
         System.out.println("-------------------");
@@ -350,6 +427,10 @@ public class UserInterface extends LoginLogout {
         }
     }
 
+    /**
+     * Displays all vacant apartment numbers and the rent payments
+     * for each month
+     */
     private void displayRentRecord() {
         System.out.println("AptNo    Jan    Feb    Mar    Apr    May    Jun    Jul    Aug    Sep    Oct    Nov    Dec");
         System.out.println("-----------------------------------------------------------------------------------------");
@@ -364,6 +445,9 @@ public class UserInterface extends LoginLogout {
         }
     }
 
+    /**
+     * Displays all expenses made with the date
+     */
     private void displayExpenseRecord() {
         System.out.printf("%8s%19s%24s%20s\n", "Date", "Payee", "Amount", "Category");
         System.out.println("-----------------------------------------------------------------------");
@@ -374,6 +458,10 @@ public class UserInterface extends LoginLogout {
         }
     }
 
+    /**
+     * Calls the displayAnnualRent and displayAnnualExpense
+     * Displays the profit for the year
+     */
     private void displayAnnualSummary() {
         System.out.println("Annual Summary");
         System.out.println("---------------");
@@ -386,13 +474,17 @@ public class UserInterface extends LoginLogout {
         System.out.printf("Balance: %.2f\n", totalIncome - totalExpense);
     }
 
-    // Displays Annual Rent
+    /**
+     * Displays the total income for the year
+     */
     public void displayAnnualRent() {
         System.out.println("Income");
         System.out.println(totalIncome + "\n");
     }
 
-    // Calculate Anual Expense
+    /**
+     * Calculates the total expenses for the year
+     */
     private void calculateAnnualExpense() {
         expensePerCategory.clear();
         for (Expense expense : expenseRecord.values()) {
@@ -406,7 +498,9 @@ public class UserInterface extends LoginLogout {
         }
     }
 
-    // Display Anual Expense
+    /**
+     * Displays the total expenses for the year
+     */
     private void displayAnnualExpense() {
         System.out.println("Expenses");
         for (var category : expensePerCategory.keySet()) {
